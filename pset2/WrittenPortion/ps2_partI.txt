@@ -1,0 +1,91 @@
+Part I:
+1.a: 2, 3, 12, 13, 34, 24, 50, 27
+1.b: skipped 4 times
+1.c: 13, 3, 2, 24, 12, 27, 50, 34
+1.d: 3, 2, 13, 12, 24, 27, 34, 50
+1.e: 12, 3, 2, 13, 34, 27, 50, 24
+1.f:
+1.g: 3, 13, 24, 27, 2, 34, 50, 12
+
+2. Because algorithm A loops through the entire array on each iteration, its time efficiency is O(n^2). On the other
+hand, algorithm B can be either merge sort, whose time efficiency is O(n log(n)).
+
+3.a: selection sort: 15. For every iteration i, starting at 0, selection sort must compare the current element with the
+remain n-1-i elements, where n is the length of the array. And there are n-1 iterations. Therefore, the number of
+comparisons = (5+1)*5/2 = 15
+
+3.b: insertion sort: 5. Insertion sort starts its at position i == 1, and checks whether the i-th element is smaller than
+its previous element. If true, then more operations are necessary. Otherwise, there are no further operations for the
+current iteration. Because, for a sorted array, this comparison is always false, then there will only be n-1 = 5
+comparisons, where n is the length of the array.
+
+3.c: mergesort: 9. The input array of 6 element is ultimately divided into 4 subarrays of lengths 1, 2, 1, 2.
+When merging {1} with {2, 3} an array of size 1 and an array of size 2, there are 2 comparisons, because each element of
+{2, 3} must be compared with the only element in {1}. Same with when merging {4} with {5, 6}. 4 comparison at this stage.
+At the next stage, when merging {1, 2, 3} and {4, 5, 6}, two elements of one array must be compared with the three elements
+of the other array; the remaining one element needs not be compared, which leads to 5 comparisons at this stage.
+In total 4+5 = 9 comparisons.
+
+4. a: In the best case, the input array is sorted. At iteration i, there are O(n) comparisons because each position must
+be compared with all of the elements after it. And because there are O(n) iterations, the number of comparisons is O(n^2).
+However, there will be no moves, because the input array is already sorted, so it's O(1).
+The overall time efficiency is O(n^2)
+
+4. b:In the worst case, the input array is reverse sorted. At iteration i, there are O(n) comparisons because each position must
+be compared with all of the elements after it. And because there are O(n) iterations, the number of comparisons is O(n^2).
+And because the input array is reverse sorted, there will be 1 swap (or 3 moves) per each comparison, so there will be
+O(n^2) moves total. The overall time efficiency is O(n^2)
+
+5. a:
+    let n be the length of the array;
+    let x be the number of times that the comparison is executed.
+    x = (1+ (n-1))*(n-1) / 2
+
+5. b:
+    This method is O(n^2) because there are O(n) iterations and O(n) comparisons per iteration,
+    where i is the ordinal of the current iteration.
+
+5. c:
+
+    public static int findMode(int[] arr) {
+
+        Sort.quickSort(arr);
+
+        int total_freq = 1;
+        int mode = arr[0];
+        for (int i = arr.length-2; i > -1; i--){
+
+            int freq = 1; // frequency of the current element
+            if (arr[i] == arr[i+1]){
+                freq++;
+                if (freq > total_freq) {
+                    total_freq = freq;
+                    mode = arr[i];
+                }
+            }
+        }
+
+        return mode;
+    }
+
+5. d:
+    Because when comparing elements, we're only doing a single pass through the array,
+    comparisons take O(n) time. Therefore, the running time of the modified method is
+    dominated by the sorting part. Since we used quick sort, the overall time efficiency
+    of findMode() is O(n log(n)).
+
+6. a:
+Expression              Address             Value
+X                       0x128               0x840
+x.ch                    0x840               'h'
+y.prev                  0x400               'c'
+y.next.prev             0x320               'a'
+y.prev.next             0x320               'a'
+y.prev.next.next        0x660               't'
+
+6. b:
+        x.next = y;
+        x.prev = y.prev;
+        y.prev.next = x;
+        y.prev = x;
+

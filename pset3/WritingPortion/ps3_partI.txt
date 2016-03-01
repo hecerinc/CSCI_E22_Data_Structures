@@ -1,0 +1,113 @@
+1.
+    public static DNode reverseTraverse(DNode tail){
+
+        DNode trav = tail;
+        while (trav.prev != null){
+            trav.prev.next = trav;
+            trav = trav.prev;
+        }
+        return trav;
+    }
+
+2.
+    public static IntNode removeOdds(IntNode head) {
+
+        if (head == null){
+            return null;
+        }
+
+        // If the list consists entirely of odd valued nodes, then head == null at the end of this while loop
+        // and we'd return null at the end of this method
+        while ((head.val % 2) != 0) {
+            head = head.next;
+        }
+
+        // head must be even at this point
+        IntNode trav = head;
+        IntNode trail = null;
+
+        while (trav != null) {
+            if ((trav.val % 2) != 0) {
+                trail.next = trav.next;
+            } else {
+                trail = trav;
+            }
+            trav = trav.next;
+
+        }
+
+        return head;
+
+    }
+
+3. a)
+The space efficiency of the array implementation is O(m).
+The space efficiency of the linked list implementation is O(t).
+
+3. b)
+The time efficiency of the array implementation is O(m).
+The time efficiency of the linked list implementation is O(t).
+
+3. c)
+The time efficiency of the array implementation is O(m*log(m)), if we use power2() from Lecture 2.
+The time efficiency of the linked list implementation is O(t*log(m)), if we use power2() from Lecture 2.
+
+3. d)
+When one or more terms' coefficient is 0, then the linked list implementation
+is more efficient than the array implementation becanse t < m.
+
+4. a)
+The worst case is O(n^2) because for each iteration of the for-loop (and there
+are n iterations), getItem() has to traverse through i items of the input
+list and addItem() has to traverse through rev.length() items of the reversed list.
+
+4. b)
+    public static LLList reverse(LLList list) {
+
+        ListIterator iter = list.iterator();
+
+        LLList rev = new LLList();
+        while (iter.hasNext()) {
+            Object item = iter.next();
+            rev.addItem(item, 0);
+        }
+
+        return rev;
+
+4. c)
+The worst case running time of the improved algorithm should be O(n), because
+it traverses through the input list once which takes O(n) time, and at every
+iteration, the operations iter.next() and rev.addItem() take only constant time.
+
+5.
+    boolean contains(Stack stack, Object item){
+
+        boolean ret = false;
+        if (stack.isEmpty())
+            return ret;
+
+        Queue queue = new QueueImpl(); // QueueImpl is a class that implements Queue
+        while(!stack.isEmpty()){
+
+            Object curr = stack.pop();
+            queue.insert(curr);
+            if (curr.equals(item))
+                ret = true;
+        }
+
+        // The following 3 while loops restore the stack back to its original state
+        while(!queue.isEmpty()){
+            stack.push(queue.remove());
+        }
+
+        while(!stack.isEmpty()){
+            queue.insert(stack.pop());
+        }
+
+        while(!queue.isEmpty()){
+            stack.push(queue.remove());
+        }
+
+        return ret;
+
+    }

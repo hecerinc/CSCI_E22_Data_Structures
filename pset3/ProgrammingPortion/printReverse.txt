@@ -1,0 +1,83 @@
+    public static void printReverse(StringNode str) {
+        if (str == null)
+            return;
+        if (str.next == null)
+            System.out.println(str.ch);
+        System.out.println("before calling reverse string, str address is: " + ((Object) str).toString());
+
+        System.out.println("before reverse to trav, the string is: " + str.toString());
+        StringNode trav = reverseString(str);
+        System.out.println("after calling reverse string, str address is: " + str);
+        System.out.println("after reverse to trav, the str is: " + str.toString());
+        System.out.println("after reverse to trav, the trav is: " + trav.toString());
+//        StringNode old = reverseString(str);
+//        System.out.print(trav.ch);
+//        while ((trav = trav.next) != null) {
+//            System.out.print(trav.ch);
+//        }
+
+        // restore to the original order
+        System.out.println();
+        System.out.println("before reverse back, the string is: " + str.toString());
+//        System.out.println("before reverse back, the old is: " + old.toString());
+
+        reverseString(str);
+        System.out.print(str.ch);
+    }
+
+    public static StringNode reverseString2(StringNode str) {
+
+        StringNode next = null;
+        StringNode nextNext = null;
+        while (str.next != null) {
+            next = str.next;
+            nextNext = next.next;
+            next.next = str;
+
+            str = nextNext;
+        }
+        return str;
+    }
+
+
+    /**
+     * reverseString - takes in the head of the original string and returns
+     * the head of the reversed string
+     */
+
+    // TODO: make this private later
+    // TODO: consider the correctness of str =
+    // TODO: remove error condition checks and see if the solutions are still correct
+    public static StringNode reverseString(StringNode str) {
+        if (str == null)
+            return null;
+        if (str.next == null)
+            return str;
+
+        System.out.println("str address is: " + str);
+
+        StringNode trav = str;
+        StringNode oldFirst = str;
+        StringNode prev = str;
+        StringNode next = str.next;
+        while (next != null) {
+            System.out.println("str address is: " + str);
+            next = trav.next;
+            trav.next = prev;
+            prev = trav;
+            trav = next;
+        }
+        System.out.println("before str = prev, str address is: " + str);
+        str = prev;
+        System.out.println("after str = prev, str address is: " + str);
+//        System.out.println("before str = prev;" + str.ch);
+//
+        System.out.println("after str = prev: " + str.ch);
+        System.out.println("oldFirst: " + oldFirst.ch);
+        System.out.println("oldFirst.next: " + oldFirst.next.ch);
+        oldFirst.next = null;
+        System.out.println("string: " + str.toString());
+        System.out.println("string.next: " + str.next.toString());
+        return prev;
+
+    }

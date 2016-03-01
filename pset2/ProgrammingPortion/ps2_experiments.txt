@@ -1,0 +1,19 @@
+time efficiency for the almost sorted input arrays:
+    1. comparisons: O(n^2)
+    2. moves: O(n^2)
+    3. overall: O(n^2)
+
+time efficiency for the random input arrays:
+    1. comparisons: O(n^2)
+    2. moves: O(n^2)
+    3. overall: O(n^2)
+
+I generated 10 almost sorted arrays of lengths 1,000, 2,000, 4,000, 8,000, and 16,000, which totals to 50 arrays in total;
+And I generated 10 random arrays of lengths 1,000, 2,000, 4,000, 8,000, and 16,000, which totals to 50 arrays in total;
+I ran all of these arrays through swapSort() and gathered statistics on the number of moves and comparisons.
+Next, I averaged the number of moves and comparison for each category of input. There are 10 categories: 5 types of lengths
+and 2 ways to generate the input, hence 5*2 = 10.
+
+At last I divided each of these average by n, (n*log(n)), and n^2. And I founded that the quotients for avg/n and
+avg/(n*log(n)) varied a lot, whereas the quotients for avg/(n^2) stayed the same, which means that the average grew at
+the same rate as n^2. Then I knew that the time complexity of the algorithm must be O(n^2).
